@@ -1,6 +1,6 @@
-from src.wine_project.config.configuration import ConfigurationManager
-from src.wine_project.components.data_transformation import DataTransformation
-from src.wine_project import logger
+from wine_project.config.configuration import ConfigurationManager
+from wine_project.components.data_transformation import DataTransformation
+from wine_project import logger
 from pathlib import Path
 
 

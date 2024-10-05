@@ -20,4 +20,4 @@ logging.basicConfig(
     ]
 )
 
-logger = logging.getLogger("mlProjectLogger")
+logger = logging.getLogger("wine_projectLogger")

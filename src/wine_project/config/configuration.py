@@ -1,7 +1,7 @@
 
-from src.wine_project.constants import *
-from src.wine_project.utils.common import read_yaml, create_directories
-from src.wine_project.entity.config_entity import (DataIngestionConfig,
+from wine_project.constants import *
+from wine_project.utils.common import read_yaml, create_directories
+from wine_project.entity.config_entity import (DataIngestionConfig,
                                             DataValidationConfig,
                                             DataTransformationConfig,
                                             ModelTrainerConfig,
