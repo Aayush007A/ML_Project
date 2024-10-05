@@ -6,6 +6,7 @@ from src.wine_project.pipeline.prediction import PredictionPipeline
 
 
 app = Flask(__name__) # initializing a flask app
+app.jinja_env.cache = {}
 
 
 @app.route('/',methods=['GET'])  # route to display the home page
@@ -39,14 +40,31 @@ def index():
             sulphates =float(request.form['sulphates'])
             alcohol =float(request.form['alcohol'])
        
-         
-            data = [fixed_acidity,volatile_acidity,citric_acid,residual_sugar,chlorides,free_sulfur_dioxide,total_sulfur_dioxide,density,pH,sulphates,alcohol]
-            data = np.array(data).reshape(1, 11)
+             # Feature names in the order they were used for training
+            feature_names = ['fixed_acidity', 'volatile_acidity', 'citric_acid', 'residual_sugar', 'chlorides',
+                            'free_sulfur_dioxide', 'total_sulfur_dioxide', 'density', 'pH', 'sulphates', 'alcohol']
+
+            data_dict = {
+                'fixed acidity': [fixed_acidity],
+                'volatile acidity': [volatile_acidity],
+                'citric acid': [citric_acid],
+                'residual sugar': [residual_sugar],
+                'chlorides': [chlorides],
+                'free sulfur dioxide': [free_sulfur_dioxide],
+                'total sulfur dioxide': [total_sulfur_dioxide],
+                'density': [density],
+                'pH': [pH],
+                'sulphates': [sulphates],
+                'alcohol': [alcohol]
+            }
+            # Create a DataFrame
+            data = pd.DataFrame(data_dict)
             
             obj = PredictionPipeline()
             predict = obj.predict(data)
+            # print(predict[0][0])
 
-            return render_template('results.html', prediction = str(predict))
+            return render_template('index.html', prediction = predict)
 
         except Exception as e:
             print('The Exception message is: ',e)
